@@ -10,3 +10,7 @@ Thank you:
 - The City of New Westminster: https://opendata.newwestcity.ca
 
 Visit: https://saintaardvarkthecarpeted.com/random/trees/trees.html
+
+# Next steps
+
+- https://leafletjs.com/examples/mobile/
