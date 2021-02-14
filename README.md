@@ -9,7 +9,7 @@ Thank you:
 - https://github.com/Raruto/leaflet-kmz
 - The City of New Westminster: https://opendata.newwestcity.ca
 
-Visit: https://saintaardvarkthecarpeted.com/random/trees/trees.html
+Visit: https://va7unx.space/trees
 
 # Next steps
 
