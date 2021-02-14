@@ -24,9 +24,18 @@
 	preferCanvas: true // recommended when loading large layers.
       });
 
-      map.setView(new L.LatLng(49.217, -122.910), 17);
-      // map.locate({setView: true, maxZoom: 17});
+      // map.setView(new L.LatLng(49.217, -122.910), 17);
+      map.locate({setView: true, maxZoom: 19});
+      function onLocationFound(e) {
+	var radius = e.accuracy;
 
+	L.marker(e.latlng).addTo(map)
+	  .bindPopup("You are within " + radius + " meters of this point").openPopup();
+
+	L.circle(e.latlng, radius).addTo(map);
+      }
+
+      map.on('locationfound', onLocationFound);
       var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 	maxZoom: 17,
 	attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
