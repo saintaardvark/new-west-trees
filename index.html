@@ -14,20 +14,34 @@
   <script>
 
   // initialize the map
-  var map = L.map('map').setView([49.217, -122.910], 3);
+  var map = L.map('map').setView([49.217, -122.910], 17);
 
   // load a tile layer
   L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
     {
       attribution: 'Tiles by <a href="https://mapc.org">MAPC</a>, Data by <a href="https://mass.gov/mgis">MassGIS</a>',
-      maxZoom: 17,
+      maxZoom: 18,
       minZoom: 9
     }).addTo(map);
 
+  function onEachFeature(feature, layer) {
+    // does this feature have a property named Genus? (Cultivar, Species, Scientific_Name, Common_Name)
+
+    if (feature.properties && feature.properties.Genus) {
+	popupMsg = "Genus: " + feature.properties.Genus
+		    + "<br>Cultivar: " + feature.properties.Cultivar
+		    + "<br>Species: " + feature.properties.Species
+		    + "<br>Scientific Name: " + feature.properties.Scientific_Name
+		    + "<br>Common Name: " + feature.properties.Common_Name;
+        layer.bindPopup(popupMsg);
+    }
+  }
   // load GeoJSON from an external file
   $.getJSON("TREES_EAST.json",function(data){
     // add GeoJSON layer to the map once the file is loaded
-    L.geoJson(data).addTo(map);
+	  L.geoJson(data, {
+		  onEachFeature: onEachFeature
+	  }).addTo(map);
   });
 
   </script>
