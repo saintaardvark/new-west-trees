@@ -7,6 +7,9 @@ Thank you:
 
 - Leaflet.js
 - https://github.com/Raruto/leaflet-kmz
+- Georges Labrèche for
+  https://github.com/georgeslabreche/opssat-smartcam-map; I stole much
+  of the map code from him
 - The City of New Westminster: https://opendata.newwestcity.ca
 
 Visit: https://va7unx.space/trees
