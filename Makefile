@@ -42,3 +42,5 @@ setup:
 		-it \
 		trees-postgis \
 		sh -c 'exec psql -h "$$POSTGRES_PORT_5432_TCP_ADDR" -p "$$POSTGRES_PORT_5432_TCP_PORT" -U postgres nwtrees -c  "CREATE EXTENSION postgis; SELECT postgis_full_version();"'
+
+# SELECT * FROM nwtrees WHERE common_name='SWEETGUM' ORDER BY wkb_geometry <-> ST_SetSRID(ST_MakePoint(49.217,-122.9), 4326) LIMIT 5
