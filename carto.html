@@ -15,7 +15,7 @@
 	<input type="radio" name="filter" value="all" checked>Show all trees
 	<input type="radio" name="filter" value="SWEETGUM">Sweetgum trees only
       </form>
-      </div>
+    </div>
     <script>
       // Tile layer options.
       // More here: https://leaflet-extras.github.io/leaflet-providers/preview/
@@ -137,6 +137,33 @@
 	  }).addTo(map);
 	});
       }
+      function showSweetgum() {
+	if (map.hasLayer(nwTrees)) {
+	  map.removeLayer(nwTrees);
+	};
+	$.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+querySweetgumTrees, function(data){
+	  nwTrees = L.geoJson(data, {
+	    onEachFeature: function(feature, layer) {
+              if (feature.properties) {
+		popupMsg = "Genus: " + feature.properties.Genus
+		  + "<br>Cultivar: " + feature.properties.Cultivar
+		  + "<br>Species: " + feature.properties.Species
+		  + "<br>Scientific Name: " + feature.properties.Scientific_Name
+		  + "<br>Common Name: " + feature.properties.Common_Name;
+		layer.bindPopup(popupMsg);
+	      }
+	    }
+	  }).addTo(map);
+	});
+      }
+      // Event listeners
+      $('input[value=SWEETGUM]').click(function() {
+	showSweetgum();
+      });
+      $('input[value=all]').click(function() {
+	showAll();
+      });
+
       // Only initialize dropdown lists if all data was successfully fetched.
       $('.map-tile-select').change(function(){
         // Remove current tile layer.
