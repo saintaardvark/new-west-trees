@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>New West Trees</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <style>
+      #map{ height: 100% }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="controls">
+      <form action="">
+	<input type="radio" name="filter" value="all" checked>Show all trees
+	<input type="radio" name="filter" value="SWEETGUM">Sweetgum trees only
+      </form>
+      </div>
+    <script>
+      // Tile layer options.
+      // More here: https://leaflet-extras.github.io/leaflet-providers/preview/
+      var tileLayer_Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: 'abcd',
+        minZoom: 0,
+        maxZoom: 20,
+        ext: 'png'
+      });
+
+      var tileLayer_Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+      });
+
+      var tileLayer_Esri_DeLorme = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Copyright: &copy;2012 DeLorme',
+        minZoom: 1,
+        maxZoom: 11
+      });
+
+      var tileLayer_Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+      });
+
+      var tileLayers = [
+        tileLayer_Stamen_TonerLite, // Minimal
+        tileLayer_Esri_WorldStreetMap, // Standard
+        tileLayer_Esri_DeLorme, // Topographic
+        tileLayer_Esri_WorldImagery // Satellite
+      ];
+
+      // Select Standard by default.
+      var selectedMapTileLayerIndex = 1;
+
+      // initialize the map
+      var map = L.map('map').setView([49.217, -122.910], 15);
+
+      // Add defailt map tile layer to the map.
+      tileLayers[selectedMapTileLayerIndex].addTo(map);
+
+
+      // Build a tile layer selection control.
+      var tileLayerControl = L.control({position: 'topright'});
+
+      tileLayerControl.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = '<select class="map-tile-select">' +
+          '<option value="0">Minimal</option>' +
+          '<option value="1" selected>Standard</option>' +
+          '<option value="2">Topographic</option>' +
+          '<option value="3">Satellite</option>' +
+          '</select>';
+        div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+
+        return div;
+      };
+
+      // Build a tile layer selection control.
+      var tileLayerControl = L.control({position: 'topright'});
+
+      tileLayerControl.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        div.innerHTML = '<select class="map-tile-select">' +
+          '<option value="0">Minimal</option>' +
+          '<option value="1" selected>Standard</option>' +
+          '<option value="2">Topographic</option>' +
+          '<option value="3">Satellite</option>' +
+          '</select>';
+        div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+
+        return div;
+      };
+
+      // Add a tile layer selection control.
+      tileLayerControl.addTo(map);
+
+      function onEachFeature(feature, layer) {
+        // does this feature have a property named Genus? (Cultivar, Species, Scientific_Name, Common_Name)
+
+        if (feature.properties) {
+          popupMsg = "Genus: " + feature.properties.Genus
+            + "<br>Cultivar: " + feature.properties.Cultivar
+            + "<br>Species: " + feature.properties.Species
+            + "<br>Scientific Name: " + feature.properties.Scientific_Name
+            + "<br>Common Name: " + feature.properties.Common_Name;
+          layer.bindPopup(popupMsg);
+        }
+      }
+      // // load GeoJSON from an external file
+      // $.getJSON("TREES_EAST.json",function(data){
+      //   // add GeoJSON layer to the map once the file is loaded
+      //   L.geoJson(data, {
+      //     onEachFeature: onEachFeature
+      //   }).addTo(map);
+      // });
+
+      var nwTrees = null;
+      var cartoDBUserName = "saintaardvark";
+      var queryAllTrees = "SELECT * FROM trees_east";
+      var querySweetgumTrees = "SELECT * FROM trees_east WHERE common_name='SWEETGUM'";
+      function showAll() {
+	if (map.hasLayer(nwTrees)) {
+	  map.removeLayer(nwTrees);
+	};
+	// Get CARTO selection as GeoJSON & add to map
+	$.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+queryAllTrees, function(data) {
+	  nwTrees = L.geoJson(data, {
+	    onEachFeature: function (feature, layer) {
+              if (feature.properties) {
+		popupMsg = "Genus: " + feature.properties.Genus
+		  + "<br>Cultivar: " + feature.properties.Cultivar
+		  + "<br>Species: " + feature.properties.Species
+		  + "<br>Scientific Name: " + feature.properties.Scientific_Name
+		  + "<br>Common Name: " + feature.properties.Common_Name;
+		layer.bindPopup(popupMsg);
+              }
+	    }
+	  }).addTo(map);
+	});
+      }
+      // Only initialize dropdown lists if all data was successfully fetched.
+      $('.map-tile-select').change(function(){
+        // Remove current tile layer.
+        map.removeLayer(tileLayers[selectedMapTileLayerIndex]);
+
+        // Add selectred tile layer.
+        selectedMapTileLayerIndex = $(".map-tile-select option:selected").attr("value");
+        map.addLayer(tileLayers[selectedMapTileLayerIndex]);
+      });
+      $( document ).ready(function() {
+	showAll();
+      })
+      </script>
+  </body>
+</html>
