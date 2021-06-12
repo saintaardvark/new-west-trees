@@ -5,7 +5,7 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <style>
-      #map{ height: 100% }
+      #map{ height: 90% }
     </style>
   </head>
   <body>
@@ -14,8 +14,11 @@
       <form action="">
 	<input type="radio" name="filter" value="all" checked>Show all trees
 	<input type="radio" name="filter" value="SWEETGUM">Sweetgum trees only
+	<input type="button" onclick="locateUser()" value="Find tree closest to me">
+	<input type="button" onclick="showAll()" value="Reset map"
       </form>
     </div>
+
     <script>
       // Tile layer options.
       // More here: https://leaflet-extras.github.io/leaflet-providers/preview/
@@ -137,6 +140,7 @@
 	  }).addTo(map);
 	});
       }
+
       function showSweetgum() {
 	if (map.hasLayer(nwTrees)) {
 	  map.removeLayer(nwTrees);
@@ -163,6 +167,7 @@
       $('input[value=all]').click(function() {
 	showAll();
       });
+
 
       // Only initialize dropdown lists if all data was successfully fetched.
       $('.map-tile-select').change(function(){
