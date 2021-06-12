@@ -3,6 +3,8 @@
     <title>New West Trees</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"></link>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <style>
       #map{ height: 90% }
@@ -196,7 +198,10 @@
 		layer.bindPopup(popupMsg);
               }
 	    }
-	  }).addTo(map);
+	  });
+	  var clusters = L.markerClusterGroup();
+	  clusters.addLayer(nwTrees);
+	  map.addLayer(clusters);
 	});
       }
 
