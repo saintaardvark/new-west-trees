@@ -1,7 +1,11 @@
 # Trees of New West
 
-Data source:
-http://opendata.newwestcity.ca/datasets/tree-inventory-east
+Data source: the City of New Westminster's tree inventory dataset:
+- http://opendata.newwestcity.ca/datasets/tree-inventory-east
+
+Contains information licenced under the Open Government Licence - City of New Westminster:
+- http://opendata.newwestcity.ca/licence
+
 
 Thank you:
 
