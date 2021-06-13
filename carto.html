@@ -102,11 +102,12 @@
         // does this feature have a property named Genus? (Cultivar, Species, Scientific_Name, Common_Name)
 
         if (feature.properties) {
-          popupMsg = "Genus: " + feature.properties.Genus
-            + "<br>Cultivar: " + feature.properties.Cultivar
-            + "<br>Species: " + feature.properties.Species
-            + "<br>Scientific Name: " + feature.properties.Scientific_Name
-            + "<br>Common Name: " + feature.properties.Common_Name;
+          popupMsg = "Genus: " + feature.properties.genus
+            + "<br>Cultivar: " + feature.properties.cultivar
+            + "<br>Species: " + feature.properties.species
+            + "<br>Scientific Name: " + feature.properties.scientific_name
+            + "<br>Common Name: " + feature.properties.common_name;
+	  console.log(properties)
           layer.bindPopup(popupMsg);
         }
       }
@@ -167,11 +168,11 @@
 	  nwTrees = L.geoJson(data, {
 	    onEachFeature: function (feature, layer) {
               if (feature.properties) {
-		popupMsg = "Genus: " + feature.properties.Genus
-		  + "<br>Cultivar: " + feature.properties.Cultivar
-		  + "<br>Species: " + feature.properties.Species
-		  + "<br>Scientific Name: " + feature.properties.Scientific_Name
-		  + "<br>Common Name: " + feature.properties.Common_Name;
+		popupMsg = "Genus: " + feature.properties.genus
+		  + "<br>Cultivar: " + feature.properties.cultivar
+		  + "<br>Species: " + feature.properties.species
+		  + "<br>Scientific Name: " + feature.properties.scientific_name
+		  + "<br>Common Name: " + feature.properties.common_name;
 		layer.bindPopup(popupMsg);
               }
 	    }
@@ -190,11 +191,11 @@
 	  nwTrees = L.geoJson(data, {
 	    onEachFeature: function (feature, layer) {
               if (feature.properties) {
-		popupMsg = "Genus: " + feature.properties.Genus
-		  + "<br>Cultivar: " + feature.properties.Cultivar
-		  + "<br>Species: " + feature.properties.Species
-		  + "<br>Scientific Name: " + feature.properties.Scientific_Name
-		  + "<br>Common Name: " + feature.properties.Common_Name;
+		popupMsg = "Genus: " + feature.properties.genus
+		  + "<br>Cultivar: " + feature.properties.cultivar
+		  + "<br>Species: " + feature.properties.species
+		  + "<br>Scientific Name: " + feature.properties.scientific_name
+		  + "<br>Common Name: " + feature.properties.common_name;
 		layer.bindPopup(popupMsg);
               }
 	    }
