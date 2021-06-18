@@ -20,7 +20,6 @@
 	<input type="button" onclick="showAll()" value="Reset map">
 	<div id="common_name_menu">
 	  <select id="common_name_list">
-	    <option value="sweetgum">Sweetgum</option>
 	</div>
       </form>
     </div>
@@ -157,6 +156,19 @@
 	alert(e.message);
       }
 
+      function populateMenuWithAllTreeCommonNames() {
+	// TODO: Filter out empty answers, NULL
+	$.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?q="+queryAllTreeCommonNames, function(data) {
+	  // Debugging
+	  // console.log(data);
+  	  $.each(data.rows, function(key, value) {
+	    // TODO: Capitalize rather than default UPPER CASE
+	    common_name = value.common_name;
+	    $('#common_name_list').append(`<option value="` + common_name + `">` + common_name + `</option>`);
+	  });
+	});
+      }
+
       function closestTree() {
       	var sqlQueryClosestTrees = "SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+myLocation.lng+","+myLocation.lat+"), 4326) LIMIT 5";
 
@@ -252,6 +264,7 @@
         map.addLayer(tileLayers[selectedMapTileLayerIndex]);
       });
       $( document ).ready(function() {
+	populateMenuWithAllTreeCommonNames();
 	showAll();
       })
       </script>
