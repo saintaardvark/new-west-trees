@@ -18,10 +18,11 @@ Thank you:
 
 Visit: https://va7unx.space/trees
 
+**Note:** I'm working (slowly...) on new functionality, which you can
+see at https://va7unx.space/trees/carto.html
+
 # Next steps
 
 - https://leafletjs.com/examples/mobile/
 
-https://saintaardvark.carto.com/dataset/trees_east
-
-Geoserver
+- Geoserver + PostGIS
