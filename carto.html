@@ -18,6 +18,10 @@
 	<input type="radio" name="filter" value="SWEETGUM">Sweetgum trees only
 	<input type="button" onclick="locateUser()" value="Find tree closest to me">
 	<input type="button" onclick="showAll()" value="Reset map">
+	<div id="common_name_menu">
+	  <select id="common_name_list">
+	    <option value="sweetgum">Sweetgum</option>
+	</div>
       </form>
     </div>
     <p>Contains <a href="http://opendata.newwestcity.ca/datasets/tree-inventory-east" target="blank">information</a> licenced under the <a href="http://opendata.newwestcity.ca/licence" target="blank">Open Government Licence - City of New Westminster</a></p>
@@ -132,7 +136,7 @@
       var cartoDBUserName = "saintaardvark";
       var queryAllTrees = "SELECT * FROM trees_east";
       var querySweetgumTrees = "SELECT * FROM trees_east WHERE common_name='SWEETGUM'";
-
+      var queryAllTreeCommonNames = "SELECT DISTINCT common_name FROM trees_east ORDER BY common_name";
       function locateUser() {
 	map.locate({setView: true, maxZoom: 17});
       }
