@@ -169,6 +169,32 @@
 	});
       }
 
+      function selectTreesMatchingCommonName(common_name) {
+	if (map.hasLayer(nwTrees)) {
+	  map.removeLayer(nwTrees);
+	};
+
+	// remove locationMarker layer if present
+	if (map.hasLayer(locationMarker)) {
+	  map.removeLayer(locationMarker);
+	};
+
+	$.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryAllTrees + " WHERE common_name = '" + common_name + "'", function(data) {
+	  nwTrees = L.geoJson(data, {
+	    onEachFeature: function (feature, layer) {
+	      if (feature.properties) {
+		popupMsg = "Genus: "  + feature.properties.genus
+		  + "<br>Cultivar: " + feature.properties.cultivar
+		  + "<br>Species: " + feature.properties.species
+		  + "<br>Scientific Name: " + feature.properties.scientific_name
+		  + "<br>Common Name: " + feature.properties.common_name;
+		layer.bindPopup(popupMsg);
+	      }
+	    }
+	  }).addTo(map);
+	});
+      }
+
       function closestTree() {
       	var sqlQueryClosestTrees = "SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+myLocation.lng+","+myLocation.lat+"), 4326) LIMIT 5";
 
