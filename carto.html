@@ -66,6 +66,7 @@
       // Build a tile layer selection control.
       var tileLayerControl = L.control({position: 'topright'});
 
+      // FIXME: #1 is hard-coded
       tileLayerControl.onAdd = function (map) {
         var div = L.DomUtil.create('div', 'info legend');
         div.innerHTML = '<select class="map-tile-select">' +
