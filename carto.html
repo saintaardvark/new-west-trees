@@ -200,7 +200,10 @@
               }
 	    }
 	  });
-	  var clusters = L.markerClusterGroup();
+	  var clusters = L.markerClusterGroup({
+	    spiderfyOnMaxZoom: false,
+	    disableClusteringAtZoom: 18,
+	  });
 	  clusters.addLayer(nwTrees);
 	  map.addLayer(clusters);
 	});
