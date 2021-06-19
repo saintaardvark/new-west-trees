@@ -291,6 +291,11 @@
       });
       $( document ).ready(function() {
 	populateMenuWithAllTreeCommonNames();
+	$('#common_name_list').change(function () {
+	  if ($(this).val()) {
+	    selectTreesMatchingCommonName($(this).val());
+	  };
+	});
 	showAll();
       })
       </script>
