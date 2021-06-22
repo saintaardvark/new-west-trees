@@ -184,6 +184,11 @@
 	  map.removeLayer(locationMarker);
 	};
 
+	if (map.hasLayer(clusters)) {
+	  map.removeLayer(clusters);
+	};
+
+
 	$.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryAllTrees + " WHERE common_name = '" + common_name + "'", function(data) {
 	  nwTrees = L.geoJson(data, {
 	    onEachFeature: function (feature, layer) {
@@ -198,6 +203,12 @@
 	    }
 	  }).addTo(map);
 	});
+	var clusters = L.markerClusterGroup({
+	  spiderfyOnMaxZoom: false,
+	  disableClusteringAtZoom: 18,
+	});
+	clusters.addLayer(nwTrees);
+	map.addLayer(clusters);
       }
 
       function closestTree() {
