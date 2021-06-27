@@ -90,6 +90,7 @@ function onEachFeature(feature, layer) {
 }
 
 var nwTrees = null;
+var clusters = null;
 var locationMarker = null;
 var myLocation = null;
 
@@ -149,7 +150,6 @@ function selectTreesMatchingCommonName(common_name) {
     map.removeLayer(clusters);
   };
 
-
   $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryAllTrees + " WHERE common_name = '" + common_name + "'", function(data) {
     nwTrees = L.geoJson(data, {
       onEachFeature: function (feature, layer) {
@@ -162,14 +162,15 @@ function selectTreesMatchingCommonName(common_name) {
 	  layer.bindPopup(popupMsg);
 	}
       }
-    }).addTo(map);
+    });
+    clusters = L.markerClusterGroup({
+      spiderfyOnMaxZoom: false,
+      disableClusteringAtZoom: 18,
+    });
+    clusters.addLayer(nwTrees);
+    map.addLayer(clusters);
+    nwTrees.addTo(map);
   });
-  var clusters = L.markerClusterGroup({
-    spiderfyOnMaxZoom: false,
-    disableClusteringAtZoom: 18,
-  });
-  clusters.addLayer(nwTrees);
-  map.addLayer(clusters);
 }
 
 function closestTree() {
@@ -220,7 +221,7 @@ function showAll() {
         }
       }
     });
-    var clusters = L.markerClusterGroup({
+    clusters = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
       disableClusteringAtZoom: 18,
     });
