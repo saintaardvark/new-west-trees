@@ -88,13 +88,6 @@ function onEachFeature(feature, layer) {
     layer.bindPopup(popupMsg);
   }
 }
-// // load GeoJSON from an external file
-// $.getJSON("TREES_EAST.json",function(data){
-//   // add GeoJSON layer to the map once the file is loaded
-//   L.geoJson(data, {
-//     onEachFeature: onEachFeature
-//   }).addTo(map);
-// });
 
 var nwTrees = null;
 var locationMarker = null;
