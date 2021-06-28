@@ -177,9 +177,14 @@ function selectTreesMatchingCommonName(common_name) {
 }
 
 function closestTree() {
-  var sqlQueryClosestTrees = "SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+myLocation.lng+","+myLocation.lat+"), 4326) LIMIT 5";
   maybeClearLayers();
 
+  var sqlQueryClosestTrees;
+  if ($('#common_name_list').val() == "") {
+    sqlQueryClosestTrees = "SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(" + myLocation.lng + "," + myLocation.lat + "), 4326) LIMIT 5";
+  } else {
+    sqlQueryClosestTrees = "SELECT * FROM trees_east WHERE common_name = " + $('#common_name_list').val() + "ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(" + myLocation.lng + "," + myLocation.lat + "), 4326) LIMIT 5";
+  }
   // remove nwTrees layer if present
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+sqlQueryClosestTrees, function(data) {
     nwTrees = L.geoJson(data, {
