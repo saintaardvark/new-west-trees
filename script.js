@@ -275,7 +275,9 @@ $( document ).ready(function() {
   $('#common_name_list').change(function () {
     if ($(this).val()) {
       selectTreesMatchingCommonName($(this).val());
-    };
+    } else {
+      showAll();
+    }
   });
   showAll();
 })
