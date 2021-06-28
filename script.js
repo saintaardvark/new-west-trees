@@ -99,7 +99,6 @@ function onEachFeature(feature, layer) {
       + "<br>Species: " + feature.properties.species
       + "<br>Scientific Name: " + feature.properties.scientific_name
       + "<br>Common Name: " + feature.properties.common_name;
-    console.log(properties)
     layer.bindPopup(popupMsg);
   }
 }
