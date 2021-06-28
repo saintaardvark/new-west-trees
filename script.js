@@ -203,10 +203,13 @@ function closestTree() {
 }
 
 function showAll() {
-  if (map.hasLayer(nwTrees) || map.hasLayer(locationMarker)) {
+  if (map.hasLayer(nwTrees)) {
     map.removeLayer(nwTrees);
-    map.removeLayer(locationMarker);
+
   };
+  if (map.hasLayer(locationMarker)) {
+    map.removeLayer(locationMarker);
+  }
   // Get CARTO selection as GeoJSON & add to map
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+queryAllTrees, function(data) {
     nwTrees = L.geoJson(data, {
