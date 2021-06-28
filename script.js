@@ -75,6 +75,21 @@ tileLayerControl.onAdd = function (map) {
 // Add a tile layer selection control.
 tileLayerControl.addTo(map);
 
+function maybeClearLayers() {
+  if (map.hasLayer(nwTrees)) {
+    map.removeLayer(nwTrees);
+  };
+
+  // remove locationMarker layer if present
+  if (map.hasLayer(locationMarker)) {
+    map.removeLayer(locationMarker);
+  };
+
+  if (map.hasLayer(clusters)) {
+    map.removeLayer(clusters);
+  };
+}
+
 function onEachFeature(feature, layer) {
   // does this feature have a property named Genus? (Cultivar, Species, Scientific_Name, Common_Name)
 
@@ -137,19 +152,7 @@ function populateMenuWithAllTreeCommonNames() {
 }
 
 function selectTreesMatchingCommonName(common_name) {
-  if (map.hasLayer(nwTrees)) {
-    map.removeLayer(nwTrees);
-  };
-
-  // remove locationMarker layer if present
-  if (map.hasLayer(locationMarker)) {
-    map.removeLayer(locationMarker);
-  };
-
-  if (map.hasLayer(clusters)) {
-    map.removeLayer(clusters);
-  };
-
+  maybeClearLayers();
   $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryAllTrees + " WHERE common_name = '" + common_name + "'", function(data) {
     nwTrees = L.geoJson(data, {
       onEachFeature: function (feature, layer) {
@@ -175,17 +178,9 @@ function selectTreesMatchingCommonName(common_name) {
 
 function closestTree() {
   var sqlQueryClosestTrees = "SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint("+myLocation.lng+","+myLocation.lat+"), 4326) LIMIT 5";
+  maybeClearLayers();
 
   // remove nwTrees layer if present
-  if (map.hasLayer(nwTrees)) {
-    map.removeLayer(nwTrees);
-  };
-
-  // remove locationMarker layer if present
-  if (map.hasLayer(locationMarker)) {
-    map.removeLayer(locationMarker);
-  };
-
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+sqlQueryClosestTrees, function(data) {
     nwTrees = L.geoJson(data, {
       onEachFeature: function (feature, layer) {
@@ -203,13 +198,7 @@ function closestTree() {
 }
 
 function showAll() {
-  if (map.hasLayer(nwTrees)) {
-    map.removeLayer(nwTrees);
-
-  };
-  if (map.hasLayer(locationMarker)) {
-    map.removeLayer(locationMarker);
-  }
+  maybeClearLayers();
   // Get CARTO selection as GeoJSON & add to map
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+queryAllTrees, function(data) {
     nwTrees = L.geoJson(data, {
@@ -234,9 +223,7 @@ function showAll() {
 }
 
 function showSweetgum() {
-  if (map.hasLayer(nwTrees)) {
-    map.removeLayer(nwTrees);
-  };
+  maybeClearLayers();
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+querySweetgumTrees, function(data){
     nwTrees = L.geoJson(data, {
       onEachFeature: function(feature, layer) {
