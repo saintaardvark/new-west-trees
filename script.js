@@ -188,16 +188,7 @@ function closestTree() {
   // remove nwTrees layer if present
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+sqlQueryClosestTrees, function(data) {
     nwTrees = L.geoJson(data, {
-      onEachFeature: function (feature, layer) {
-        if (feature.properties) {
-	  popupMsg = "Genus: " + feature.properties.genus
-	    + "<br>Cultivar: " + feature.properties.cultivar
-	    + "<br>Species: " + feature.properties.species
-	    + "<br>Scientific Name: " + feature.properties.scientific_name
-	    + "<br>Common Name: " + feature.properties.common_name;
-	  layer.bindPopup(popupMsg);
-        }
-      }
+      onEachFeature: onEachFeature,
     }).addTo(map);
   });
 }
@@ -207,16 +198,7 @@ function showAll() {
   // Get CARTO selection as GeoJSON & add to map
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+queryAllTrees, function(data) {
     nwTrees = L.geoJson(data, {
-      onEachFeature: function (feature, layer) {
-        if (feature.properties) {
-	  popupMsg = "Genus: " + feature.properties.genus
-	    + "<br>Cultivar: " + feature.properties.cultivar
-	    + "<br>Species: " + feature.properties.species
-	    + "<br>Scientific Name: " + feature.properties.scientific_name
-	    + "<br>Common Name: " + feature.properties.common_name;
-	  layer.bindPopup(popupMsg);
-        }
-      }
+      onEachFeature: onEachFeature,
     });
     clusters = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
@@ -231,16 +213,7 @@ function showSweetgum() {
   maybeClearLayers();
   $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+querySweetgumTrees, function(data){
     nwTrees = L.geoJson(data, {
-      onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-	  popupMsg = "Genus: " + feature.properties.Genus
-	    + "<br>Cultivar: " + feature.properties.Cultivar
-	    + "<br>Species: " + feature.properties.Species
-	    + "<br>Scientific Name: " + feature.properties.Scientific_Name
-	    + "<br>Common Name: " + feature.properties.Common_Name;
-	  layer.bindPopup(popupMsg);
-	}
-      }
+      onEachFeature: onEachFeature,
     }).addTo(map);
   });
 }
