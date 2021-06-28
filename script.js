@@ -139,7 +139,7 @@ function locationNotFound(e) {
 
 function populateMenuWithAllTreeCommonNames() {
   // TODO: Filter out empty answers, NULL
-  $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?q="+queryAllTreeCommonNames, function(data) {
+  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?q=" + queryAllTreeCommonNames, function(data) {
     // Debugging
     // console.log(data);
     $.each(data.rows, function(key, value) {
@@ -184,7 +184,7 @@ function closestTree() {
   } else {
     sqlQueryClosestTrees = "SELECT * FROM trees_east WHERE common_name = " + $('#common_name_list').val() + "ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(" + myLocation.lng + "," + myLocation.lat + "), 4326) LIMIT 5";
   }
-  $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+sqlQueryClosestTrees, function(data) {
+  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + sqlQueryClosestTrees, function(data) {
     nwTrees = L.geoJson(data, {
       onEachFeature: onEachFeature,
     }).addTo(map);
@@ -194,7 +194,7 @@ function closestTree() {
 function showAll() {
   maybeClearLayers();
   // Get CARTO selection as GeoJSON & add to map
-  $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+queryAllTrees, function(data) {
+  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryAllTrees, function(data) {
     nwTrees = L.geoJson(data, {
       onEachFeature: onEachFeature,
     });
@@ -209,7 +209,7 @@ function showAll() {
 
 function showSweetgum() {
   maybeClearLayers();
-  $.getJSON("https://"+cartoDBUserName+".carto.com/api/v2/sql?format=GeoJSON&q="+querySweetgumTrees, function(data){
+  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + querySweetgumTrees, function(data){
     nwTrees = L.geoJson(data, {
       onEachFeature: onEachFeature,
     }).addTo(map);
