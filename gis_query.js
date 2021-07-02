@@ -65,3 +65,29 @@ function selectTreesMatchingCommonName(common_name) {
     nwTrees.addTo(map);
   });
 }
+
+function showUnknownTrees(common_name) {
+  if (map.hasLayer(unknownTrees)) {
+    map.removeLayer(unknownTrees);
+  };
+  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryUnknownTrees, function(data) {
+    unknownTrees = L.geoJson(data, {
+      pointToLayer: function(feature, latlng) {
+	var smallIcon = new L.Icon({
+	  iconSize: [25, 41],
+	  iconAnchor: [12, 41],
+	  popupAnchor: [1, -34],
+	  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png",
+	});
+	return L.marker(latlng, {icon: smallIcon});
+      },
+      onEachFeature: onEachFeature,
+    });
+    clusters = L.markerClusterGroup({
+      spiderfyOnMaxZoom: false,
+      disableClusteringAtZoom: 18,
+    });
+    clusters.addLayer(unknownTrees);
+    map.addLayer(clusters);
+  });
+}

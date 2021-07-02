@@ -80,6 +80,10 @@ function maybeClearLayers() {
     map.removeLayer(nwTrees);
   };
 
+  if (map.hasLayer(knownTrees)) {
+    map.removeLayer(knownTrees);
+  };
+
   // remove locationMarker layer if present
   if (map.hasLayer(locationMarker)) {
     map.removeLayer(locationMarker);
@@ -104,6 +108,8 @@ function onEachFeature(feature, layer) {
 }
 
 var nwTrees = null;
+var knownTrees = null;
+var unknownTrees = null;
 var clusters = null;
 var locationMarker = null;
 var myLocation = null;
