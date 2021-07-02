@@ -1,6 +1,5 @@
 var cartoDBUserName = "saintaardvark";
 var queryAllTrees = "SELECT * FROM trees_east";
-var querySweetgumTrees = "SELECT * FROM trees_east WHERE common_name='SWEETGUM'";
 var queryAllTreeCommonNames = "SELECT DISTINCT common_name FROM trees_east ORDER BY common_name";
 
 function selectTreesMatchingCommonName(common_name) {
@@ -59,19 +58,3 @@ function showAll() {
     map.addLayer(clusters);
   });
 }
-
-function showSweetgum() {
-  maybeClearLayers();
-  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + querySweetgumTrees, function(data){
-    nwTrees = L.geoJson(data, {
-      onEachFeature: onEachFeature,
-    }).addTo(map);
-  });
-}
-// Event listeners
-$('input[value=SWEETGUM]').click(function() {
-  showSweetgum();
-});
-$('input[value=all]').click(function() {
-  showAll();
-});

@@ -146,8 +146,6 @@ function populateMenuWithAllTreeCommonNames() {
   });
 }
 
-
-
 // Only initialize dropdown lists if all data was successfully fetched.
 $('.map-tile-select').change(function(){
   // Remove current tile layer.
