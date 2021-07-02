@@ -54,16 +54,7 @@ function selectTreesMatchingCommonName(common_name) {
   maybeClearLayers();
   $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryAllTrees + " WHERE common_name = '" + common_name + "'", function(data) {
     nwTrees = L.geoJson(data, {
-      onEachFeature: function (feature, layer) {
-	if (feature.properties) {
-	  popupMsg = "Genus: "  + feature.properties.genus
-	    + "<br>Cultivar: " + feature.properties.cultivar
-	    + "<br>Species: " + feature.properties.species
-	    + "<br>Scientific Name: " + feature.properties.scientific_name
-	    + "<br>Common Name: " + feature.properties.common_name;
-	  layer.bindPopup(popupMsg);
-	}
-      }
+      onEachFeature: onEachFeature
     });
     clusters = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,

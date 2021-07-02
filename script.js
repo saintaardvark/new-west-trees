@@ -170,3 +170,8 @@ $( document ).ready(function() {
 $('input[value=all]').click(function() {
   showAll();
 });
+
+// Event listeners
+$('input[value=unknownOnly]').click(function() {
+  showUnknownTrees();
+});
