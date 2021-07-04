@@ -182,3 +182,9 @@ $('input[value=all]').click(function() {
 $('input[value=unknownOnly]').click(function() {
   showUnknownTrees();
 });
+
+$("#about-btn").click(function() {
+  $("#aboutModal").modal("show");
+  $(".navbar-collapse.in").colapse("hide");
+  return false;
+});
