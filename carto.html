@@ -17,53 +17,56 @@
     </style>
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-	<div class="navbar-header">
-	  <div class="navbar-icon-container">
-	    <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
-	    <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-goggle-btn"><i class="fa fa-search fa-lg white"></i></a>
-	  </div>
-	  <a class="navbar-brand" href="#">New West Trees</a>
-	</div>
-	<!-- Don't know why this isn't working -->
-	<!-- <div class="navbar-collapse collapse"> -->
-	  <div>
-	  <form class="navbar-form navbar-right" role="search">
-	    <div class="form-group has=feedback">
-	      <input id="searchbox" type="text" placeholder="Search" class="form-control">
-	      <span id="searchicon" class="fa fa-search form-control-feedback"></span>
+	<a class="navbar-brand" href="#">New West Trees</a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+	    <!-- <li class="nav-item"> -->
+	      <!--   <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+	      <!-- </li> -->
+	    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aboutModal">
+	      About
+	    </button>
+	  </ul>
+	  <form class="d-flex" action="">
+	    <input class="form-check-input" type="radio" name="filter" id="show-all-trees" value="all" checked>
+	    <label class="form-check-label" for="show-all-trees">
+	      Show all trees
+	    </label>
+	    <input class="form-check-input" type="radio" name="filter" id="show-unknown-trees" value="unknownOnly">
+	    <label class="form-check-label" for="show-unknown-trees">
+	      Show unknown trees
+	    </label>
+	    <button type="button" class="btn btn-primary" onclick="locateUser()">Find tree closest to me</button>
+	    <button type="button" class="btn btn-primary" onclick="showAll()">Reset map"</button>
+	    <div id="common_name_menu">
+	      <select id="common_name_list">
 	    </div>
 	  </form>
-	  <ul class="nav navbar-nav">
-	    <li><a hef="#" data-toggle="collapse" data-target=".navbr-collapse.in" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;About</a></li>
-	  </ul>
+
+	  <form class="d-flex">
+	    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+	    <button class="btn btn-outline-success" type="submit">Search</button>
+	  </form>
 	</div>
       </div>
-    </div>
+    </nav>
     <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg">
 	<div class="modal-content">
 	  <div class="modal-header">
-	    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
+	    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
 	    <h4 class="modal title">Welcome to New West Trees!</h4>
 	  </div>
 	  <div class="modal-body">
-	    <ul class="nav nav-tabs nav-justified" id="aboutTabs">
-	      <li class="active"><a href="#about" data-toggle="tab"><i class="fa fa-question-circle"></i>&nbsp;About the project</a></li>
-	      <li><a href="#credits" data-toggle="tab"><i class="fa fa-globe"></i>&nbsp;Credits</a></li>
-	    </ul>
-	    <div class="tab-content" id="aboutTabsContent">
-	      <div class="tab-pane fade active in" id="about">
-		<p>A project to display New Westminster trees.</p>
-	      </div>
-	    </div>
-	    <div class="tab-content" id="creditsTabsContent">
-	      <div class="tab-pane fade in" id="credits">
-		<p>Contains information licenced under the <a href="http://opendata.newwestcity.ca/licence">Open Government Licence - City of New Westminster</a>.</p>
-		<p><a href="http://opendata.newwestcity.ca/datasets/tree-inventory-east">Original data set</a></p>
-	      </div>
-	    </div>
+	    <p>A project to display New Westminster trees.</p>
+	    <p>Contains information licenced under the <a href="http://opendata.newwestcity.ca/licence">Open Government Licence - City of New Westminster</a>.</p>
+	    <p><a href="http://opendata.newwestcity.ca/datasets/tree-inventory-east">Original data set</a></p>
+	    <p>
 	  </div>
 	</div>
       </div>
