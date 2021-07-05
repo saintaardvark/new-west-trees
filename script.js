@@ -110,6 +110,7 @@ function onEachFeature(feature, layer) {
 var nwTrees = null;
 var knownTrees = null;
 var unknownTrees = null;
+var closestTrees = null;
 var clusters = null;
 var locationMarker = null;
 var myLocation = null;

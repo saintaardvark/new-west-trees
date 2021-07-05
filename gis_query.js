@@ -35,8 +35,12 @@ function showAll() {
 }
 
 function closestTree() {
-  maybeClearLayers();
-
+  if (map.hasLayer(closestTrees)) {
+    map.removeLayer(closestTrees);
+  };
+  // if (map.hasLayer(cluster)) {
+  //   map.removeLayer(cluster);
+  // };
   var sqlQueryClosestTrees;
   if ($('#common_name_list').val() == "") {
     sqlQueryClosestTrees = "SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(" + myLocation.lng + "," + myLocation.lat + "), 4326) LIMIT 5";
@@ -44,7 +48,16 @@ function closestTree() {
     sqlQueryClosestTrees = "SELECT * FROM trees_east WHERE common_name = " + $('#common_name_list').val() + "ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(" + myLocation.lng + "," + myLocation.lat + "), 4326) LIMIT 5";
   }
   $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + sqlQueryClosestTrees, function(data) {
-    nwTrees = L.geoJson(data, {
+    closestTrees = L.geoJson(data, {
+      pointToLayer: function(feature, latlng) {
+	var smallIcon = new L.Icon({
+	  iconSize: [25, 41],
+	  iconAnchor: [12, 41],
+	  popupAnchor: [1, -34],
+	  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png",
+	});
+	return L.marker(latlng, {icon: smallIcon});
+      },
       onEachFeature: onEachFeature,
     }).addTo(map);
   });
