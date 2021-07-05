@@ -179,7 +179,7 @@ $('input[value=all]').click(function() {
 });
 
 // Event listeners
-$('input[value=unknownOnly]').click(function() {
+$('input[id=show-unknown-trees]').click(function() {
   showUnknownTrees();
 });
 

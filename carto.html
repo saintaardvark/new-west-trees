@@ -33,6 +33,14 @@
 	    </button>
 	  </ul>
 	  <form class="d-flex" action="">
+	    <div class="form-check form-switch">
+	      <input class="form-check-input" type="checkbox" id="show-all-trees">
+	      <label class="form-check-label" for="show-all-trees">Show all trees</label>
+	    </div>
+	    <div class="form-check form-switch">
+	      <input class="form-check-input" type="checkbox" id="show-unknown-trees">
+	      <label class="form-check-label" for="show-all-trees">Show unknown trees</label>
+	    </div>
 	    <div class="btn-group">
 	      <button type="button" class="btn btn-outline-primary" onclick="showAll()" name="filter" id="show-all-trees" value="all">All trees</button>
 	      <button type="button" class="btn btn-outline-primary" onclick="showUnknownTrees()" name="filter" id="show-unknown-trees" value="unknownOnly">Unknown trees</button>
