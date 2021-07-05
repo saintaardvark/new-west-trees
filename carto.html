@@ -33,16 +33,12 @@
 	    </button>
 	  </ul>
 	  <form class="d-flex" action="">
-	    <input class="form-check-input" type="radio" name="filter" id="show-all-trees" value="all" checked>
-	    <label class="form-check-label" for="show-all-trees">
-	      Show all trees
-	    </label>
-	    <input class="form-check-input" type="radio" name="filter" id="show-unknown-trees" value="unknownOnly">
-	    <label class="form-check-label" for="show-unknown-trees">
-	      Show unknown trees
-	    </label>
-	    <button type="button" class="btn btn-primary" onclick="locateUser()">Find tree closest to me</button>
-	    <button type="button" class="btn btn-primary" onclick="showAll()">Reset map"</button>
+	    <div class="btn-group">
+	      <button type="button" class="btn btn-outline-primary" onclick="showAll()" name="filter" id="show-all-trees" value="all">All trees</button>
+	      <button type="button" class="btn btn-outline-primary" onclick="showUnknownTrees()" name="filter" id="show-unknown-trees" value="unknownOnly">Unknown trees</button>
+	      <button type="button" class="btn btn-outline-primary" onclick="locateUser()">Find tree closest to me</button>
+	      <button type="button" class="btn btn-outline-primary" onclick="showAll()">Reset map</button>
+	    </div>
 	    <div id="common_name_menu">
 	      <select id="common_name_list">
 	    </div>
