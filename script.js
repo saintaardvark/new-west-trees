@@ -185,6 +185,6 @@ $('input[value=unknownOnly]').click(function() {
 
 $("#about-btn").click(function() {
   $("#aboutModal").modal("show");
-  $(".navbar-collapse.in").colapse("hide");
+  $(".navbar-collapse.in").collapse("hide");
   return false;
 });
