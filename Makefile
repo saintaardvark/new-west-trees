@@ -1,5 +1,5 @@
 publish:
-	rsync -avr . l2:/var/www/projects/trees/
+	rsync --delete --exclude .git/ -avr . l2:/var/www/projects/trees/
 
 .PHONY: postgis
 postgis:
