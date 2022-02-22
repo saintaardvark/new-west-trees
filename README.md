@@ -3,8 +3,14 @@
 Data source: the City of New Westminster's tree inventory dataset:
 - http://opendata.newwestcity.ca/datasets/tree-inventory-east
 
+
 Contains information licenced under the Open Government Licence - City of New Westminster:
 - http://opendata.newwestcity.ca/licence
+P
+**Update, February 2022:**  It looks like the city's data website has
+been redesigned, and I can't find the dataset there anymore.  I've
+emailed the city to see what's up, but in the meantime this repo has
+the last JSON file I downloaded from May 2021.
 
 
 Thank you:
