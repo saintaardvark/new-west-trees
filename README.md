@@ -28,3 +28,5 @@ see at https://va7unx.space/trees/carto.html
 - https://bryanmcbride.com/bootleaf/
 
 - Geoserver + PostGIS
+
+- https://handsondataviz.org/leaflet.html -- excellent templates here
