@@ -6,12 +6,23 @@ Data source: the City of New Westminster's tree inventory dataset:
 
 Contains information licenced under the Open Government Licence - City of New Westminster:
 - http://opendata.newwestcity.ca/licence
-P
+
 **Update, February 2022:**  It looks like the city's data website has
 been redesigned, and I can't find the dataset there anymore.  I've
 emailed the city to see what's up, but in the meantime this repo has
 the last JSON file I downloaded from May 2021.
 
+**Update, March 2022:** It's back!  The dataset can be downloaded
+here:
+
+https://data-60320-newwestcity.opendata.arcgis.com/datasets/tree-inventory/explore
+
+Thank you to the City of New Westminster for doing this.
+
+Note: it looks like this dataset now covers the whole city, instead of
+being split into east/west like it was before.  I have not yet tried
+this new dataset in this repo.  As noted above, the repo still has the
+last JSON file I downloaded in May 2021.
 
 Thank you:
 
