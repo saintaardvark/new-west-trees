@@ -1,7 +1,7 @@
 # Trees of New West
 
 Data source: the City of New Westminster's tree inventory dataset:
-- http://opendata.newwestcity.ca/datasets/tree-inventory-east
+- https://opendata.newwestcity.ca/datasets/newwestcity::tree-inventory/explore
 
 
 Contains information licenced under the Open Government Licence - City of New Westminster:
@@ -15,7 +15,7 @@ the last JSON file I downloaded from May 2021.
 **Update, March 2022:** It's back!  The dataset can be downloaded
 here:
 
-https://data-60320-newwestcity.opendata.arcgis.com/datasets/tree-inventory/explore
+https://opendata.newwestcity.ca/datasets/newwestcity::tree-inventory/explore
 
 Thank you to the City of New Westminster for doing this.
 
