@@ -1,6 +1,9 @@
 publish:
 	rsync --delete --exclude .git/ -avr . l2:/var/www/projects/trees/
 
+serve:
+	python3 -mhttp.server
+
 .PHONY: postgis
 postgis:
 	-@docker stop trees-postgis
