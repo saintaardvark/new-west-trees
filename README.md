@@ -5,7 +5,7 @@ Data source: the City of New Westminster's tree inventory dataset:
 
 
 Contains information licenced under the Open Government Licence - City of New Westminster:
-- http://opendata.newwestcity.ca/licence
+- https://data-60320-newwestcity.opendata.arcgis.com/pages/terms-of-use
 
 **Update, February 2022:**  It looks like the city's data website has
 been redesigned, and I can't find the dataset there anymore.  I've
