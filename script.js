@@ -163,7 +163,8 @@ $('.map-tile-select').change(function(){
   map.addLayer(tileLayers[selectedMapTileLayerIndex]);
 });
 $( document ).ready(function() {
-  populateMenuWithAllTreeCommonNames();
+  // TODO: Need to figure out how we'll do this without Carto
+  // populateMenuWithAllTreeCommonNames();
   $('#common_name_list').change(function () {
     if ($(this).val()) {
       selectTreesMatchingCommonName($(this).val());
