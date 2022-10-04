@@ -27,7 +27,11 @@
 	  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aboutModal">
 	    About
 	  </button>
-	  <button type="button" class="btn btn-secondary" onclick="locateUser()">Find tree closest to me</button>
+	  <!--
+	    Need to wait 'til I figure out whether to use a GIS
+	    database or not.
+	    <button type="button" class="btn btn-secondary" onclick="locateUser()">Find tree closest to me</button>
+	  -->
 	  <button type="button" class="btn btn-info" onclick="showAll()">Reset map</button>
 	  <form class="d-sm-flex" action="">
 	    <div id="common_name_menu">
@@ -63,7 +67,11 @@
       <form action="">
 	<input type="radio" name="filter" value="all" checked>Show all trees
 	<input type="radio" name="filter" value="unknownOnly">Show only unknown trees
-	<input type="button" onclick="locateUser()" value="Find tree closest to me">
+	<!--
+	    Need to wait 'til I figure out whether to use a GIS
+	    database or not.
+	    <input type="button" onclick="locateUser()" value="Find tree closest to me">
+	-->
 	<input type="button" onclick="showAll()" value="Reset map">
 	<div id="common_name_menu">
 	  <select id="common_name_list">
