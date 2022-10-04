@@ -98,11 +98,11 @@ function onEachFeature(feature, layer) {
   // does this feature have a property named Genus? (Cultivar, Species, Scientific_Name, Common_Name)
 
   if (feature.properties) {
-    popupMsg = "Genus: " + feature.properties.genus
-      + "<br>Cultivar: " + feature.properties.cultivar
-      + "<br>Species: " + feature.properties.species
-      + "<br>Scientific Name: " + feature.properties.scientific_name
-      + "<br>Common Name: " + feature.properties.common_name;
+    popupMsg = "Genus: " + feature.properties.GENUS
+      + "<br>Cultivar: " + feature.properties.CULTIVAR
+      + "<br>Species: " + feature.properties.SPECIES
+      + "<br>Full name: " + feature.properties.FULL_NAME
+      + "<br>Address: " + feature.properties.ADDRESS
     layer.bindPopup(popupMsg);
   }
 }
