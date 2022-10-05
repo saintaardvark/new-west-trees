@@ -165,7 +165,7 @@ $(document).ready(() => {
   $.getJSON('Tree_Inventory.geojson', (data) => {
     allTreeData = data.features;
     // TODO: Decide how to handle the different properties:  FULL_NAME vs SPECIES vs GENUS vs undefined
-    allTreeData.forEach((k, v) => {allTreeFullNames.add(k.properties.FULL_NAME)});
+    allTreeData.forEach((k, v) => { allTreeFullNames.add(k.properties.FULL_NAME); });
   }).then(() => {
     populateMenuWithAllTreeCommonNames();
   }).then(() => {
