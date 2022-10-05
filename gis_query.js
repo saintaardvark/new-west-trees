@@ -43,18 +43,17 @@ function closestTree() {
 
 function selectTreesMatchingCommonName(common_name) {
   maybeClearLayers();
-  $.getJSON(`https://${cartoDBUserName}.carto.com/api/v2/sql?format=GeoJSON&q=${queryAllTrees} WHERE common_name = '${common_name}'`, (data) => {
-    nwTrees = L.geoJson(data, {
-      onEachFeature,
-    });
-    clusters = L.markerClusterGroup({
-      spiderfyOnMaxZoom: false,
-      disableClusteringAtZoom: 18,
-    });
-    clusters.addLayer(nwTrees);
-    map.addLayer(clusters);
-    nwTrees.addTo(map);
+  matchingTrees = allTreeData.filter((item) => item.properties.FULL_NAME === common_name);
+  nwTrees = L.geoJson(matchingTrees, {
+    onEachFeature,
   });
+  clusters = L.markerClusterGroup({
+    spiderfyOnMaxZoom: false,
+    disableClusteringAtZoom: 18,
+  });
+  clusters.addLayer(nwTrees);
+  map.addLayer(clusters);
+  nwTrees.addTo(map);
 }
 
 function showUnknownTrees(common_name) {
