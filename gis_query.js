@@ -1,17 +1,14 @@
 function showAll() {
   maybeClearLayers();
-  // Get CARTO selection as GeoJSON & add to map
-  $.getJSON('Tree_Inventory.geojson', (data) => {
-    nwTrees = L.geoJson(data, {
-      onEachFeature,
-    });
-    clusters = L.markerClusterGroup({
-      spiderfyOnMaxZoom: false,
-      disableClusteringAtZoom: 18,
-    });
-    clusters.addLayer(nwTrees);
-    map.addLayer(clusters);
+  nwTrees = L.geoJson(allTreeData, {
+    onEachFeature,
   });
+  clusters = L.markerClusterGroup({
+    spiderfyOnMaxZoom: false,
+    disableClusteringAtZoom: 18,
+  });
+  clusters.addLayer(nwTrees);
+  map.addLayer(clusters);
 }
 
 // TODO: Needs refactoring now that I'm not using carto.
