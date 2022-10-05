@@ -141,10 +141,10 @@ function locationNotFound(e) {
 
 function populateMenuWithAllTreeCommonNames() {
   // TODO: Filter out empty answers, NULL
-  allTreeFullNames.forEach((entry) => {
+  Array.from(allTreeFullNames).sort().forEach((entry) => {
     $('#common_name_list').append(
-      `<option value="${entry}">${entry}</option>`
-    )
+      `<option value="${entry}">${entry}</option>`,
+    );
   });
 }
 
