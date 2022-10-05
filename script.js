@@ -30,12 +30,12 @@ function onEachFeature(feature, layer) {
   }
 }
 
-var nwTrees = null;
-var knownTrees = null;
+let nwTrees = null;
+let knownTrees = null;
 const unknownTrees = null;
 const closestTrees = null;
-var clusters = null;
-var locationMarker = null;
+let clusters = null;
+let locationMarker = null;
 let myLocation = null;
 
 const greenIcon = L.icon({
