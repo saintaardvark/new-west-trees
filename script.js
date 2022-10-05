@@ -141,14 +141,10 @@ function locationNotFound(e) {
 
 function populateMenuWithAllTreeCommonNames() {
   // TODO: Filter out empty answers, NULL
-  $.getJSON(`https://${cartoDBUserName}.carto.com/api/v2/sql?q=${queryAllTreeCommonNames}`, (data) => {
-    // Debugging
-    // console.log(data);
-    $.each(data.rows, (key, value) => {
-      // TODO: Capitalize rather than default UPPER CASE
-      common_name = value.common_name;
-      $('#common_name_list').append(`<option value="${common_name}">${common_name}</option>`);
-    });
+  allTreeFullNames.forEach((entry) => {
+    $('#common_name_list').append(
+      `<option value="${entry}">${entry}</option>`
+    )
   });
 }
 
@@ -161,9 +157,21 @@ $('.map-tile-select').change(() => {
   selectedMapTileLayerIndex = $('.map-tile-select option:selected').attr('value');
   map.addLayer(tileLayers[selectedMapTileLayerIndex]);
 });
+
+let allTreeData = [];
+let allTreeFullNames = new Set();
+
 $(document).ready(() => {
-  // TODO: Need to figure out how we'll do this without Carto
-  // populateMenuWithAllTreeCommonNames();
+  $.getJSON('Tree_Inventory.geojson', (data) => {
+    allTreeData = data.features;
+    // TODO: Decide how to handle the different properties:  FULL_NAME vs SPECIES vs GENUS vs undefined
+    allTreeData.forEach((k, v) => {allTreeFullNames.add(k.properties.FULL_NAME)});
+  }).then(() => {
+    populateMenuWithAllTreeCommonNames();
+  }).then(() => {
+    showAll();
+  });
+
   $('#common_name_list').change(function () {
     if ($(this).val()) {
       selectTreesMatchingCommonName($(this).val());
@@ -171,7 +179,6 @@ $(document).ready(() => {
       showAll();
     }
   });
-  showAll();
 });
 
 $('input[value=all]').click(() => {
