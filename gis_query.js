@@ -1,9 +1,9 @@
 function showAll() {
   maybeClearLayers();
   // Get CARTO selection as GeoJSON & add to map
-  $.getJSON("Tree_Inventory.geojson", function(data) {
+  $.getJSON('Tree_Inventory.geojson', (data) => {
     nwTrees = L.geoJson(data, {
-      onEachFeature: onEachFeature,
+      onEachFeature,
     });
     clusters = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
@@ -18,37 +18,37 @@ function showAll() {
 function closestTree() {
   if (map.hasLayer(closestTrees)) {
     map.removeLayer(closestTrees);
-  };
+  }
   // if (map.hasLayer(cluster)) {
   //   map.removeLayer(cluster);
   // };
-  var sqlQueryClosestTrees;
-  if ($('#common_name_list').val() == "") {
-    sqlQueryClosestTrees = "SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(" + myLocation.lng + "," + myLocation.lat + "), 4326) LIMIT 5";
+  let sqlQueryClosestTrees;
+  if ($('#common_name_list').val() == '') {
+    sqlQueryClosestTrees = `SELECT * FROM trees_east ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(${myLocation.lng},${myLocation.lat}), 4326) LIMIT 5`;
   } else {
-    sqlQueryClosestTrees = "SELECT * FROM trees_east WHERE common_name = " + $('#common_name_list').val() + "ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(" + myLocation.lng + "," + myLocation.lat + "), 4326) LIMIT 5";
+    sqlQueryClosestTrees = `SELECT * FROM trees_east WHERE common_name = ${$('#common_name_list').val()}ORDER BY the_geom <-> ST_SetSRID(ST_MakePoint(${myLocation.lng},${myLocation.lat}), 4326) LIMIT 5`;
   }
-  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + sqlQueryClosestTrees, function(data) {
+  $.getJSON(`https://${cartoDBUserName}.carto.com/api/v2/sql?format=GeoJSON&q=${sqlQueryClosestTrees}`, (data) => {
     closestTrees = L.geoJson(data, {
-      pointToLayer: function(feature, latlng) {
-	var smallIcon = new L.Icon({
+      pointToLayer(feature, latlng) {
+        const smallIcon = new L.Icon({
 	  iconSize: [25, 41],
 	  iconAnchor: [12, 41],
 	  popupAnchor: [1, -34],
-	  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png",
-	});
-	return L.marker(latlng, {icon: smallIcon});
+	  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-violet.png',
+        });
+        return L.marker(latlng, { icon: smallIcon });
       },
-      onEachFeature: onEachFeature,
+      onEachFeature,
     }).addTo(map);
   });
 }
 
 function selectTreesMatchingCommonName(common_name) {
   maybeClearLayers();
-  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryAllTrees + " WHERE common_name = '" + common_name + "'", function(data) {
+  $.getJSON(`https://${cartoDBUserName}.carto.com/api/v2/sql?format=GeoJSON&q=${queryAllTrees} WHERE common_name = '${common_name}'`, (data) => {
     nwTrees = L.geoJson(data, {
-      onEachFeature: onEachFeature
+      onEachFeature,
     });
     clusters = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
@@ -63,19 +63,19 @@ function selectTreesMatchingCommonName(common_name) {
 function showUnknownTrees(common_name) {
   if (map.hasLayer(unknownTrees)) {
     map.removeLayer(unknownTrees);
-  };
-  $.getJSON("https://" + cartoDBUserName + ".carto.com/api/v2/sql?format=GeoJSON&q=" + queryUnknownTrees, function(data) {
+  }
+  $.getJSON(`https://${cartoDBUserName}.carto.com/api/v2/sql?format=GeoJSON&q=${queryUnknownTrees}`, (data) => {
     unknownTrees = L.geoJson(data, {
-      pointToLayer: function(feature, latlng) {
-	var smallIcon = new L.Icon({
+      pointToLayer(feature, latlng) {
+        const smallIcon = new L.Icon({
 	  iconSize: [25, 41],
 	  iconAnchor: [12, 41],
 	  popupAnchor: [1, -34],
-	  iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png",
-	});
-	return L.marker(latlng, {icon: smallIcon});
+	  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png',
+        });
+        return L.marker(latlng, { icon: smallIcon });
       },
-      onEachFeature: onEachFeature,
+      onEachFeature,
     });
     clusters = L.markerClusterGroup({
       spiderfyOnMaxZoom: false,
