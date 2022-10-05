@@ -70,6 +70,11 @@ function populateMenuWithAllTreeCommonNames() {
       `<option value="${entry}">${entry}</option>`,
     );
   });
+  Array.from(allTreeGenus).sort().forEach((entry) => {
+    $('#genus_list').append(
+      `<option value="${entry}">${entry}</option>`,
+    );
+  });
 }
 
 // Only initialize dropdown lists if all data was successfully fetched.
@@ -84,12 +89,20 @@ $('.map-tile-select').change(() => {
 
 let allTreeData = [];
 let allTreeFullNames = new Set();
+let allTreeGenus = new Set();
+
+function buildData() {
+  // TODO: Decide how to handle the different properties:  FULL_NAME vs SPECIES vs GENUS vs undefined
+  allTreeData.forEach((k, v) => {
+    allTreeFullNames.add(k.properties.FULL_NAME);
+    allTreeGenus.add(k.properties.GENUS);
+  });
+}
 
 $(document).ready(() => {
   $.getJSON('Tree_Inventory.geojson', (data) => {
     allTreeData = data.features;
-    // TODO: Decide how to handle the different properties:  FULL_NAME vs SPECIES vs GENUS vs undefined
-    allTreeData.forEach((k, v) => { allTreeFullNames.add(k.properties.FULL_NAME); });
+    buildData();
   }).then(() => {
     populateMenuWithAllTreeCommonNames();
   }).then(() => {
