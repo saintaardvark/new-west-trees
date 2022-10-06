@@ -56,6 +56,21 @@ function selectTreesMatchingCommonName(common_name) {
   nwTrees.addTo(map);
 }
 
+function selectTreesMatchingGenus(genus) {
+  maybeClearLayers();
+  matchingTrees = allTreeData.filter((item) => item.properties.GENUS === genus);
+  nwTrees = L.geoJson(matchingTrees, {
+    onEachFeature,
+  });
+  clusters = L.markerClusterGroup({
+    spiderfyOnMaxZoom: false,
+    disableClusteringAtZoom: 18,
+  });
+  clusters.addLayer(nwTrees);
+  map.addLayer(clusters);
+  nwTrees.addTo(map);
+}
+
 function showUnknownTrees(common_name) {
   if (map.hasLayer(unknownTrees)) {
     map.removeLayer(unknownTrees);

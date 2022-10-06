@@ -70,6 +70,11 @@ function populateMenuWithAllTreeCommonNames() {
       `<option value="${entry}" id="common_name">${entry}</option>`,
     );
   });
+  // allTreeNames has a blank entry; we duplicate that manually here.
+  // TODO: The whole genus/species thing needs refactoring
+  $('#genus_list').append(
+    `<option value="" id="genus"></option>`
+  );
   Array.from(allTreeGenus).sort().forEach((entry) => {
     $('#genus_list').append(
       `<option value="${entry}" id="genus">${entry}</option>`,
@@ -112,6 +117,13 @@ $(document).ready(() => {
   $('#common_name_list').change(function () {
     if ($(this).val()) {
       selectTreesMatchingCommonName($(this).val());
+    } else {
+      showAll();
+    }
+  });
+  $('#genus_list').change(function () {
+    if ($(this).val()) {
+      selectTreesMatchingGenus($(this).val());
     } else {
       showAll();
     }
