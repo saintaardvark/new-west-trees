@@ -67,12 +67,12 @@ function populateMenuWithAllTreeCommonNames() {
   // TODO: Filter out empty answers, NULL
   Array.from(allTreeFullNames).sort().forEach((entry) => {
     $('#common_name_list').append(
-      `<option value="${entry}">${entry}</option>`,
+      `<option value="${entry}" id="common_name">${entry}</option>`,
     );
   });
   Array.from(allTreeGenus).sort().forEach((entry) => {
     $('#genus_list').append(
-      `<option value="${entry}">${entry}</option>`,
+      `<option value="${entry}" id="genus">${entry}</option>`,
     );
   });
 }
