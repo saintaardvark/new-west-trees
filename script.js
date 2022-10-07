@@ -17,6 +17,16 @@ function maybeClearLayers() {
   }
 }
 
+function showSpeciesMenu() {
+  $("#common_name_menu").show();
+  $("#genus_menu").hide();
+}
+
+function showGenusMenu() {
+  $("#common_name_menu").hide();
+  $("#genus_menu").show();
+}
+
 function onEachFeature(feature, layer) {
   // does this feature have a property named Genus? (Cultivar, Species, Scientific_Name, Common_Name)
 

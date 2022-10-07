@@ -32,6 +32,13 @@
 	  </button>
 	  <button type="button" class="btn btn-info" onclick="showAll()">Reset map</button>
 	  <form class="d-sm-flex" action="">
+	    <div class="btn-group" role="group" aria-label="Toggle search by species or genus">
+	      <input type="radio" class="btn-check" name="btnradio" id="searchBySpecies" autocomplete="off" onclick="showSpeciesMenu()" checked />
+	      <label class="btn btn-outline-primary" for="searchBySpecies">Search by species</label>
+
+	      <input type="radio" class="btn-check" name="btnradio" id="searchByGenus" autocomplete="off" onclick="showGenusMenu()"/>
+	      <label class="btn btn-outline-primary" for="searchByGenus">Search by genus</label>
+	    </div>
 	    <div id="common_name_menu">
 	      <label for="common_name">Common name</label>
 	      <select id="common_name_list"></select>
