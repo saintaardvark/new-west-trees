@@ -27,15 +27,32 @@ function showGenusMenu() {
   $("#genus_menu").show();
 }
 
+// https://www.samanthaming.com/pictorials/how-to-capitalize-a-string/
+// Thank you, Samantha Ming!
+function capitalize(str) {
+  const lower = str.toLowerCase();
+  return str.charAt(0).toUpperCase() + lower.slice(1);
+}
+
 function onEachFeature(feature, layer) {
   // does this feature have a property named Genus? (Cultivar, Species, Scientific_Name, Common_Name)
 
   if (feature.properties) {
+    genus = feature.properties.GENUS;
+    species = feature.properties.SPECIES;
+    if ((genus !== null) && (species !== null)) {
+      species = species.toLowerCase();
+      genus = capitalize(genus);
+      wikipediaLink = `<a href="https://en.wikipedia.org/wiki/${genus}_${species}" target="_blank">Wikipedia</a>`;
+    } else {
+      wikipediaLink = "";
+    }
     popupMsg = `Genus: ${feature.properties.GENUS
     }<br>Cultivar: ${feature.properties.CULTIVAR
     }<br>Species: ${feature.properties.SPECIES
     }<br>Full name: ${feature.properties.FULL_NAME
-    }<br>Address: ${feature.properties.ADDRESS}`;
+    }<br>Address: ${feature.properties.ADDRESS
+    }<br>${wikipediaLink}`;
     layer.bindPopup(popupMsg);
   }
 }
